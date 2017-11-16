@@ -25,10 +25,10 @@ do
   dir=$(basename "$dir")
 
   echo "Starting backup for $dir ..."
-  duplicity --exclude-filelist /root/exclude-backup.txt $dir b2://${B2_ACCOUNT}:${B2_KEY}@${B2_BUCKET}/$dir/ --full-if-older-than 30D --numeric-owner
+  duplicity --exclude-filelist /root/exclude-backup.txt $dir b2://${B2_ACCOUNT}:${B2_KEY}@${B2_BUCKET}/$dir/ --full-if-older-than 15D --numeric-owner
 
   echo "Deleting old backups on B2..."
-  duplicity remove-all-but-n-full 2 --force b2://${B2_ACCOUNT}:${B2_KEY}@${B2_BUCKET}/$dir/
+  duplicity remove-all-but-n-full 4 --force b2://${B2_ACCOUNT}:${B2_KEY}@${B2_BUCKET}/$dir/
 done
 
 unset PASSPHRASE
